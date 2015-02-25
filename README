@@ -1,0 +1,24 @@
+hdmilter - A daemon to throttle mail relay
+
+A simple way to throttle mail relay, avoiding becoming spamming source.
+
+How to compile
+
+Install developing files for libmemcached and libmilter, for example(Debian):
+
+$ sudo apt-get install libmemcached-dev libmilter-dev
+$ make
+
+How to run
+
+Configure postfix file(/etc/postfix/main.cf):
+
+smtpd_milters = inet:127.0.0.1:5800
+milter_default_action=accept
+milter_connect_macros=client_addr
+milter_mail_macros=auth_authen auth_author auth_type
+milter_data_macros=i
+
+Startup from command line:
+./startup.sh
+
